@@ -1,0 +1,80 @@
+<html>
+	<script src="jquery-3.3.1.min.js" type="text/javascript"></script>
+
+	<div class="block block-themed">
+		<div class="block-content ">
+			<form class="js-validation-bootstrap  form-horizontal push-5-t" action="#" onSubmit="return false;" method="post" >
+				<div class="form-group ">
+					<label class="col-xs-12" for="notifica_titolo">Titolo</label>
+					<div class="col-xs-12">
+						<input class="form-control" type="text" id="notifica_titolo" name="notifica_titolo" placeholder="" value="">
+					</div>
+					<div class="col-xs-6">
+						<div class="help-block">Max Characters 40: <b id="title_counter" style="color:#5cb85c">40</b></div>
+					</div>
+				</div>
+				
+				<hr>
+
+				<div class="form-group">
+					<label class="col-xs-12" for="notifica_testo">Testo</label>
+					<div class="col-xs-12">
+						<textarea  class="form-control" rows="2" id="notifica_testo" name="notifica_testo" placeholder="" value=""> </textarea>
+					</div>
+					<div class="col-xs-6">
+						<div class="help-block">Max Characters 100: <b id="text_counter" style="color:#5cb85c">100</b></div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</html>
+
+<script>
+
+	//Trigger
+	$("#notifica_testo").on('input',function() {
+		count_em_good($(this).attr('id'));
+	});
+
+	$("#notifica_titolo").on('input',function() {
+		count_em_good($(this).attr('id'));
+	});
+
+
+	//Funzione che conta quanti caratteri possono ancora esseri inseriti nei campi titolo e testo della creazione e modifica notifica
+	function count_em_good(trigger_id){
+		var max;
+		var text_field_len = document.getElementById(trigger_id).value.length;
+		var diff;
+		var element;
+
+		switch(trigger_id){
+			case 'notifica_titolo':
+				max = 40;
+				diff = max - text_field_len;
+				element = document.getElementById('title_counter');
+			break;
+			case 'notifica_testo':
+				max = 100;
+				diff = max - text_field_len;
+				element = document.getElementById('text_counter');
+			break;
+		}
+	
+		if(diff >= 0){
+			if(diff > max/2){
+				element.style.color = "#5cb85c";
+			}else if(diff <= ((max/2) / 2)){
+				element.style.color = "#d9534f";
+			}else if(diff <= max/2){
+				element.style.color = "#f0ad4e";
+			}
+			element.innerHTML = diff;
+		}else{
+			var text_field_value = document.getElementById(trigger_id).value;
+			document.getElementById(trigger_id).value = text_field_value.substring(text_field_value,max);
+		}	
+	}
+
+</script>
