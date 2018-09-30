@@ -4,7 +4,7 @@
 ----------------------------------------------- USAGE ----------------------------------------------------------
 
 A simple script that prevents the user from writing more charactes than you decide into an Input element.
-It also shows the user how many characters remain with a simple graphic eleemnt under the input.
+It also shows the user how many characters remain with a simple graphic element under the input.
 
 
 
